@@ -1,5 +1,3 @@
-# aws-infra
-
 Prerequisites Before you begin, make sure you have the following:
 
 An AWS account Terraform installed on your local machine AWS CLI installed on your local machine
@@ -23,3 +21,10 @@ Create a new directory for your Terraform code. Create a new file called main.tf
 Step 5: Initialize and apply Terraform code To initialize and apply your Terraform code, follow these steps:
 
 Open a terminal window and navigate to your Terraform code directory. Run the command terraform init to initialize your Terraform code. Run the command terraform plan to see what changes Terraform will make to your infrastructure. Run the command terraform apply to apply your Terraform code and create your infrastructure. Review the output to make sure there are no errors. Step 6: Destroy the infrastructure To destroy the infrastructure you created, run the command terraform destroy. This will remove all resources created by your Terraform code.
+
+
+
+
+
+
+

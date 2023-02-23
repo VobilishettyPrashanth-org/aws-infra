@@ -1,12 +1,24 @@
 variable "cidr_name" {
-  description = "Name of the cidr block"
+  description = "Name of cidr block"
   type        = string
 }
 variable "vpc_tag_name" {
-  description = "tag Name of the Vpc"
+  description = "tag Name of Vpc"
   type        = string
 }
 variable "aws_region" {
-  description = "name of the aws region"
+  description = "aws region name"
+  type        = string
+}
+variable "aws_subnet_count" {
+  description = "aws subnet count"
+  type        = number
+}
+variable "my_ip" {
+  description = "my current ip address"
+  type        = string
+}
+variable "my_ami" {
+  description = "my ami"
   type        = string
 }
