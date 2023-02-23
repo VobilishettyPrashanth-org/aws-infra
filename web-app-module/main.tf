@@ -45,10 +45,11 @@ resource "aws_route_table" "private_rt" {
 
 
 resource "aws_subnet" "public_subnet" {
-  count             = local.no_of_subnets
-  cidr_block        = cidrsubnet(aws_vpc.webapp_vpc.cidr_block, 8, count.index)
-  vpc_id            = aws_vpc.webapp_vpc.id
-  availability_zone = data.aws_availability_zones.available.names[count.index]
+  count                   = local.no_of_subnets
+  cidr_block              = cidrsubnet(aws_vpc.webapp_vpc.cidr_block, 8, count.index)
+  vpc_id                  = aws_vpc.webapp_vpc.id
+  availability_zone       = data.aws_availability_zones.available.names[count.index]
+  map_public_ip_on_launch = true
   tags = {
     Name = "public_subnet-${aws_vpc.webapp_vpc.id}-${count.index + 1}"
   }
@@ -118,32 +119,33 @@ resource "aws_security_group" "ec2-sg" {
   }
 
   # Define outbound rules
-  egress {
-    from_port   = 0 # Allow all outbound traffic
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"] # Allow traffic to all IP addresses
-  }
+  # egress {
+  #   from_port   = 0 # Allow all outbound traffic
+  #   to_port     = 0
+  #   protocol    = "-1"
+  #   cidr_blocks = ["0.0.0.0/0"] # Allow traffic to all IP addresses
+  # }
 
   tags = {
     Name = "ec2-sg-${timestamp()}" # Set the name tag for the security group
   }
 }
 resource "aws_instance" "webapp_instance" {
-  ami             = var.my_ami                     # Set the ID of the Amazon Machine Image to use
-  instance_type   = "t2.micro"                     # Set the instance type
-  key_name        = "ec2"                          # Set the key pair to use for SSH access
-  security_groups = [aws_security_group.ec2-sg.id] # Set the security group to attach to the instance
-  subnet_id       = local.public_subnet_ids[0]     # Set the ID of the subnet to launch the instance in
+  ami                    = var.my_ami                     # Set the ID of the Amazon Machine Image to use
+  instance_type          = "t2.micro"                     # Set the instance type
+  key_name               = "ec2"                          # Set the key pair to use for SSH access
+  vpc_security_group_ids = [aws_security_group.ec2-sg.id] # Set the security group to attach to the instance
+  subnet_id              = local.public_subnet_ids[0]     # Set the ID of the subnet to launch the instance in
   # Enable protection against accidental termination
   disable_api_termination = false
   # Set the root volume size and type
   root_block_device {
-    volume_size = 50    # Replace with your preferred root volume size (in GB)
-    volume_type = "gp2" # Replace with your preferred root volume type (e.g. "gp2", "io1", etc.)
+    volume_size           = 50    # Replace with your preferred root volume size (in GB)
+    volume_type           = "gp2" # Replace with your preferred root volume type (e.g. "gp2", "io1", etc.)
+    delete_on_termination = true
   }
   # Allocate a public IPv4 address
-  associate_public_ip_address = true
+  # associate_public_ip_address = true
   tags = {
     Name = "webapp-instance-${timestamp()}" # Set the name tag for the instance
   }
