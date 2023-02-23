@@ -30,14 +30,6 @@ resource "aws_route_table" "private_rt" {
   vpc_id = aws_vpc.webapp_vpc.id
 }
 
-
-# resource "aws_route" "public_rt_internet_gateway" {
-#   route_table_id = aws_route_table.public_rt.id
-#   cidr_block = "0.0.0.0/0"
-#   gateway_id = aws_internet_gateway.webapp_igw.id
-# }
-
-
 resource "aws_subnet" "public_subnet" {
   count             = 3
   cidr_block        = cidrsubnet(aws_vpc.webapp_vpc.cidr_block, 8, count.index)
