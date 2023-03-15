@@ -339,7 +339,7 @@ resource "aws_iam_policy_attachment" "web-app-s3-attach" {
 
 
 resource "aws_iam_instance_profile" "iam_profile" {
-  name = "iam_profile"
+  name = "iam_profile_1"
   role = aws_iam_role.ec2-role.name
 }
 
