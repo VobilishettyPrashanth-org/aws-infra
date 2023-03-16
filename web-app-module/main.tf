@@ -115,6 +115,7 @@ resource "aws_security_group" "app_sg" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
   tags = {
     Name = "ec2-sg-${timestamp()}" # Set the name tag for the security group
   }
