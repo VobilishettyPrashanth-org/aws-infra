@@ -14,3 +14,5 @@ db_username       = "csye6225"
 db_password       = "Prashu123"
 db_public_access  = false
 db_multiaz        = false
+domain_name       = "dev.prashanthv.me"
+

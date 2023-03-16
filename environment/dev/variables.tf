@@ -72,3 +72,8 @@ variable "db_multiaz" {
   description = "DB multi AZ"
   type        = bool
 }
+#route 53 variable
+variable "domain_name" {
+  description = "Hosted Zone"
+  type        = string
+}
