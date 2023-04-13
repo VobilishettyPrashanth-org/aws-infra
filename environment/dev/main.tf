@@ -32,6 +32,7 @@ module "web_app" {
   db_public_access  = var.db_public_access
   db_multiaz        = var.db_multiaz
   domain_name       = var.domain_name
+  aws_account_id    = var.aws_account_id
 
 
 }

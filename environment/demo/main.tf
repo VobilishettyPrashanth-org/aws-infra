@@ -13,7 +13,6 @@ provider "aws" {
 }
 module "web_app" {
   source = "../../web-app-module"
-
   # Input Variables.
   cidr_name         = var.cidr_name
   vpc_tag_name      = var.vpc_tag_name
@@ -30,5 +29,6 @@ module "web_app" {
   db_public_access  = var.db_public_access
   db_multiaz        = var.db_multiaz
   domain_name       = var.domain_name
+  aws_account_id    = var.aws_account_id
 }
 
